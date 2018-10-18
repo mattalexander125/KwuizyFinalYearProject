@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "783762347733",
+    "firebase_url": "https://kwuizy-s125.firebaseio.com",
+    "project_id": "kwuizy-s125",
+    "storage_bucket": "kwuizy-s125.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783762347733:android:f23ae2f4f8cce1fb",
+        "android_client_info": {
+          "package_name": "fyp.com.kwuizy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "783762347733-rjcmg257otgm0g68a45b780ck880m2eh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fyp.com.kwuizy",
+            "certificate_hash": "f542d22f0ee77942010ab68205f6e775a25ae236"
+          }
+        },
+        {
+          "client_id": "783762347733-mrca2d9lv0v61mkima0q5ab17cfpkhmp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1ChaqOA1NItr--p4xPgMR-fd6f1shiYE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "783762347733-mrca2d9lv0v61mkima0q5ab17cfpkhmp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
