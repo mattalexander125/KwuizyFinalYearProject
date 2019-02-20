@@ -2,9 +2,9 @@
     <string name="app_name">Kwuizy</string>
     <string name="Welcomemsg">Welcome to Kwuizy</string>
     <string name="Welcomemsg2">Please Select an Difficulty From Options Below</string>
-    <string name="Option1">Lana</string>
-    <string name="Option2">Lanaaaaaaa! </string>
-    <string name="Option3">Danger Zone</string>
+    <string name="Option1">Easy</string>
+    <string name="Option2">Medium</string>
+    <string name="Option3">Hard</string>
     <string name="action_sign_in_short">Register</string>
     <string name="email">Email</string>
     <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
@@ -16,9 +16,9 @@
     <string name="new_pass">New Password</string>
     <string name="title_activity_profile">Firebase</string>
     <string name="title_activity_login">Sign in</string>
-    <string name="hint_email">Email</string>
+    <string name="hint_email">joeblog@example.com</string>
     <string name="hint_password">Password</string>
-    <string name="hint_name">Fullname</string>
+    <string name="hint_name">Full name</string>
     <string name="btn_login">LOGIN</string>
     <string name="prompt_password">Please enter your password</string>
     <string name="btn_link_to_register">Not a member? Get registered in Firebase now!</string>
