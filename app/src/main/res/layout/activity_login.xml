@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/blackboard"
     tools:context="fyp.com.kwuizy.LoginActivity">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="@dimen/activity_horizontal_margin">
@@ -20,8 +20,8 @@
             android:layout_height="@dimen/logo_w_h"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="30dp"
-            android:src="@mipmap/kwuizy_logo"
-            android:contentDescription=""
+            android:src="@mipmap/kwuizy_launcher_big"
+            android:contentDescription="Logo Image"
             tools:ignore="ContentDescription" />
 
 

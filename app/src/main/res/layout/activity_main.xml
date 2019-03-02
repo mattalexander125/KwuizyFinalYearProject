@@ -22,7 +22,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="20dp"
-            app:srcCompat="@mipmap/kwuizy_launcherbig" />
+            android:contentDescription="Logo Image"
+            app:srcCompat="@mipmap/kwuizy_launcher_big" />
 
         <TextView
             android:id="@+id/textView"
