@@ -80,6 +80,16 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="rock"
+        android:background="#9AABCE"
+        android:textColor="#fff"
+        android:padding="8dp"
+        android:layout_marginBottom="24dp"
+        android:id="@+id/choice4"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="quit"
         android:background="#B71C1C"
         android:textColor="#fff"
@@ -87,4 +97,4 @@
         android:layout_marginBottom="24dp"
         android:id="@+id/quit"/>
 
-</LinearLayout></android.support.constraint.ConstraintLayout>
+</LinearLayout>
