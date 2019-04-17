@@ -95,6 +95,6 @@
         android:textColor="#fff"
         android:padding="8dp"
         android:layout_marginBottom="24dp"
-        android:id="@+id/quit"/>
+        android:id="@+id/btn_quit"/>
 
 </LinearLayout>

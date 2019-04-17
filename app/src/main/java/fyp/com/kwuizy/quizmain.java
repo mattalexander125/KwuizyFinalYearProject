@@ -1,7 +1,9 @@
 package fyp.com.kwuizy;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -11,7 +13,7 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
 public class quizmain extends AppCompatActivity {
-
+    private Button qbutton;
     private TextView mScoreView;
     private TextView mQuestion;
 
@@ -25,7 +27,18 @@ public class quizmain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quizmain);
+        //quit button
+        qbutton = (Button) findViewById(R.id.btn_quit);
+        qbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMain();
+            }
+        });
 
+
+
+        //Database fills questions and answers
         mScoreView = (TextView)findViewById(R.id.score);
         mQuestion = (TextView)findViewById(R.id.question);
 
@@ -36,7 +49,13 @@ public class quizmain extends AppCompatActivity {
 
         updateQuestion();
     }
-public void updateQuestion(){
+    //quit start activity
+    private void openMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void updateQuestion(){
         mQuestionRef = new Firebase("https://console.firebase.google.com/u/0/project/kwuizy-s125/database/kwuizy-s125/data");
 
         mQuestionRef.addValueEventListener(new ValueEventListener() {

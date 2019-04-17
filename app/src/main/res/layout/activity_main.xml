@@ -7,6 +7,13 @@
     android:background="@mipmap/blackboard"
     tools:context=".MainActivity">
 
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Toolbar>
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -53,7 +60,7 @@
 
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_start"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:background="@color/bg_register"
