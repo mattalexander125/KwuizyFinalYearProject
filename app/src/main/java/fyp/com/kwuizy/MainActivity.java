@@ -1,68 +1,117 @@
 package fyp.com.kwuizy;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int REQUEST_CODE_QUIZ = 1;
+    public static final String EXTRA_CATEGORY_ID = "extraCategoryID ";
+    public static final String EXTRA_CATEGORY_NAME = "extraCategoryName";
+    public static final String EXTRA_DIFFICULTY = "extraDifficulty";
 
-    private Button buttonStart;
+
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String KEY_HIGHSCORE = "keyHighscore";
+
+    private TextView textViewHighscore;
+    private Spinner spinnerCategory;
+    private Spinner spinnerDifficulty;
+    private int highscore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //pick category
-        buttonStart = (Button) findViewById(R.id.btn_start);
-        buttonStart.setOnClickListener(new View.OnClickListener() {
+        textViewHighscore = findViewById(R.id.text_view_highscore);
+        spinnerCategory = findViewById(R.id.spinner_category);
+        spinnerDifficulty = findViewById(R.id.spinner_difficulty);
+
+        loadCategories();
+        loadDifficultyLevels();
+        loadHighscore();
+
+        Button buttonStartQuiz = findViewById(R.id.button_start_quiz);
+        buttonStartQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startquiz();
+                startQuiz();
             }
         });
 
-
-
-         Toolbar toolbar = findViewById(R.id.toolbar);
-         setSupportActionBar(toolbar);
-
-    }
-    //Start Category activity
-    private void startquiz() {
-        Intent intent = new Intent(this, CategoryActivity.class);
-        startActivity(intent);
+        //QuizDbHelper.getInstance(this).addCategory();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    private void startQuiz(){
+        Category selectedCategory = (Category) spinnerCategory.getSelectedItem();
+        int categoryID = selectedCategory.getId();
+        String categoryName = selectedCategory.getName();
+        String difficulty = spinnerDifficulty.getSelectedItem().toString();
 
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-
-        return true;
+        Intent intent = new Intent(MainActivity.this, Quiz.class);
+        intent.putExtra(EXTRA_CATEGORY_ID, categoryID);
+        intent.putExtra(EXTRA_CATEGORY_NAME, categoryName);
+        intent.putExtra(EXTRA_DIFFICULTY, difficulty);
+        startActivityForResult(intent, REQUEST_CODE_QUIZ);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        switch (item.getItemId()){
-            case R.id.menuLogout:
-
-                FirebaseAuth.getInstance().signOut();
-                finish();
-                startActivity(new Intent(this, LoginActivity.class));
+        if (requestCode == REQUEST_CODE_QUIZ){
+            if (resultCode == RESULT_OK){
+                int score = data.getIntExtra(Quiz.EXTRA_SCORE, 0);
+                if (score > highscore){
+                    updateHighScore(score);
+                }
+            }
         }
+    }
 
-        return true;
+    private void loadCategories(){
+        QuizDbHelper dbHelper = QuizDbHelper.getInstance(this);
+        List<Category> categories = dbHelper.getAllCategories();
+
+        ArrayAdapter<Category> adapterCategories = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, categories);
+        adapterCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCategory.setAdapter(adapterCategories);
+    }
+
+    private void loadDifficultyLevels(){
+        String[] difficultyLevels = Question.getAllDifficultyLevels();
+
+        ArrayAdapter<String> adapterDifficulty = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, difficultyLevels);
+                adapterDifficulty.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerDifficulty.setAdapter(adapterDifficulty);
+    }
+
+    private void loadHighscore(){
+        SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        highscore = prefs.getInt(KEY_HIGHSCORE, 0);
+        textViewHighscore.setText("Highscore: " + highscore);
+
+    }
+
+    private void updateHighScore(int highscoreNew) {
+        highscore = highscoreNew;
+        textViewHighscore.setText("Highscore: " + highscore);
+
+        SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(KEY_HIGHSCORE, highscore);
+        editor.apply();
     }
 }
